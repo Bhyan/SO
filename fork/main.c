@@ -3,21 +3,21 @@
 #include <stdlib.h>
 
 int main() {
-    pid_t filho1, filho2, neto1, neto2;
+    pid_t pid_filho1, pid_filho2, pid_neto1, pid_neto2;
 
     printf("Pai PID = %d nasceu.\n", getpid());
 
     sleep(14);
     
-    filho1 = fork();  
-    if(!filho1) {
+    pid_filho1 = fork();  
+    if(!pid_filho1) {
         
         printf("Filho PID = %d nasceu.\n", getpid());
         
         sleep(12);
 
-        neto1 = fork();
-        if(!neto1) {
+        pid_neto1 = fork();
+        if(!pid_neto1) {
             printf("Neto PID = %d nasceu.\n", getpid());
 
             sleep(12);
@@ -35,14 +35,14 @@ int main() {
     }
 
     sleep(2);
-    filho2 = fork();
-    if(!filho2) {
+    pid_filho2 = fork();
+    if(!pid_filho2) {
 
         printf("Filho PID = %d nasceu.\n", getpid());
 
         sleep(14);
-        neto2 = fork();
-        if(!neto2) {
+        pid_neto2 = fork();
+        if(!pid_neto2) {
 
             printf("Neto PID = %d nasceu.\n", getpid());
 
