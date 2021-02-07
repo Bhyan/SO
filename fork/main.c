@@ -26,6 +26,15 @@ int main() {
             
             exit(0);
            
+        
+            printf("Neto PID = %d nasceu.\n", getpid());
+
+            sleep(12);
+
+            printf("Neto PID = %d morreu aos 12 anos.\n", getpid());
+            
+            exit(0);
+           
         }
         sleep(18);
 
