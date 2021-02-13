@@ -2,25 +2,58 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <math.h>
 
+#define A 0.0
+#define B 10.0
 
-int soma = 0;
+double v_resultado[7] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+int indice_resultado = 0;
 
-void* somar_trapezio(void *tid) {
-    // TODO realizar calculo
+typedef struct valores_locais {
+    double local_a;
+    double local_b;
+    double local_n;
+    double local_h;
+} valores_locais;
+
+double f_reta(double valor_x) {
+    return 5.0;
+}
+
+double f_seno(double valor_x) {
+    return 418.9829 * 2.0 - valor_x * sin(sqrt(valor_x));
+}
+
+void* chama_threads(valores_locais *v_locais) {
+    double area = 0.0;
+
+    for (int i = 0; i < v_locais -> local_n; i ++) {
+        area += f_reta(v_locais -> local_a + i * v_locais -> local_h);
+    }
+
+    v_resultado[indice_resultado++] = area;
 
     pthread_exit(NULL);
 }
 
 int main(int argc, char *argv[]) {
-    int n = atoi(argv[1]);
-    pthread_t threads[n];
-    int status, i;
-    void *thread_return;
+    double h, area = 0.0;
+    int threads_size = atoi(argv[1]);
+    int n = atoi(argv[2]);
+    pthread_t threads[threads_size];
+    int status;
+    struct valores_locais v_locais;
 
-    for (i = 0; i < n; i ++) {
-        
-        status = pthread_create(&threads[i], NULL, somar_trapezio, (void *)(size_t) i);
+    h = (B - A) / n;
+    area += (f_reta(A) + f_reta(B)) / 2.0;
+
+    v_locais.local_n = n / threads_size;
+    v_locais.local_a = n / threads_size;
+
+    for (int i = 0; i < threads_size; i ++) {
+
+        status = pthread_create(&threads[i], NULL, (void*)chama_threads, (void *)(size_t) &v_locais);
 
         if (status != 0) {
             printf("Erro na criação da thread. Código de erro: %d\n", status);
@@ -28,8 +61,12 @@ int main(int argc, char *argv[]) {
         }
     }
     
-    pthread_join(threads[i - 1], &thread_return);
-    printf("Soma = %d\n", soma);
+    for (int i = 0; i < threads_size; i++) {
+        pthread_join(threads[i], NULL);
+        area += v_resultado[i];
+    }
+    
+    printf("Área = %.20f\n", area * h);
 
     return 0;
 }

@@ -1,14 +1,15 @@
 GCC = gcc
 PTHREAD = -pthread
+MATH = -lm
 
 all: \
 	main
 
 %: %.c
-	$(GCC) $< -o $@ $(PTHREAD)
+	$(GCC) $< -o $@ $(PTHREAD) $(MATH)
 
 run: 
-	./main
+	./main 6 120
 
 clean:
 	rm main
