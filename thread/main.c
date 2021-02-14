@@ -43,17 +43,26 @@ int main(int argc, char *argv[]) {
     int n = atoi(argv[2]);
     pthread_t threads[threads_size];
     int status;
-    struct valores_locais v_locais;
+    struct valores_locais v_locais[threads_size];
 
     h = (B - A) / n;
-    area += (f_reta(A) + f_reta(B)) / 2.0;
+    // area += (f_reta(A) + f_reta(B)) / 2.0;
 
-    v_locais.local_n = n / threads_size;
-    v_locais.local_a = n / threads_size;
+    v_locais[0].local_n = n / threads_size;
+    v_locais[0].local_a = A;
+    v_locais[0].local_b = B / threads_size;
 
     for (int i = 0; i < threads_size; i ++) {
 
         status = pthread_create(&threads[i], NULL, (void*)chama_threads, (void *)(size_t) &v_locais);
+
+        v_locais[i + 1].local_n = v_locais[0].local_n;
+        v_locais[i + 1].local_a = v_locais[0].local_a + v_locais[0].local_b;
+        v_locais[i + 1].local_b = v_locais[0].local_b * i;
+
+        printf("N %.2f\n", v_locais[i].local_n);
+        printf("A %.2f\n", v_locais[i].local_a);
+        printf("B %.2f\n", v_locais[i].local_b);
 
         if (status != 0) {
             printf("Erro na criação da thread. Código de erro: %d\n", status);
@@ -66,7 +75,7 @@ int main(int argc, char *argv[]) {
         area += v_resultado[i];
     }
     
-    printf("Área = %.20f\n", area * h);
+    printf("Área = %.1e\n", area * h);
 
     return 0;
 }
