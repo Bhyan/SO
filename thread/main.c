@@ -22,7 +22,7 @@ double f_reta(double valor_x) {
 }
 
 double f_seno(double valor_x) {
-    return 418.9829 * 2.0 - valor_x * sin(sqrt(valor_x));
+    return sin(2.0 * valor_x) - cos(5.0 * valor_x);
 }
 
 void* chama_threads(valores_locais *v_locais) {
