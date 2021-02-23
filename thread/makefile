@@ -1,14 +1,19 @@
 GCC = gcc
 PTHREAD = -pthread
+MATH = -lm
 
 all: \
-	main
+	main_reta \
+	main_seno
 
 %: %.c
-	$(GCC) $< -o $@ $(PTHREAD)
+	$(GCC) $< -o $@ $(PTHREAD) $(MATH)
 
-run: 
-	./main
+reta: 
+	./main_reta 6 120
+	
+seno:
+	./main_seno 7 200
 
 clean:
-	rm main
+	rm main_reta main_seno
