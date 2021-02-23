@@ -41,6 +41,8 @@ int main(int argc, char *argv[]) {
 
   h = (B - A) / n;
 
+  area = (f_reta(A) + f_reta(B)) / 2;
+
   for (int i = 0; i < threads_size; i++) {
 
     status = pthread_create(&threads[i], NULL, (void *)chama_threads,
