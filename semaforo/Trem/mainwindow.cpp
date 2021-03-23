@@ -4,17 +4,17 @@
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow) {
     ui -> setupUi(this);
 
-    trem_azul = new Trem(1, 135, 20);
-    trem_vermelho = new Trem(2, 380, 20);
-    trem_verde = new Trem(3, 625, 20);
-    trem_roxo = new Trem(4, 259, 264);
-    trem_laranja = new Trem(5, 505, 264);
+    trem_azul = new Trem(1, 135, 20, ui -> controle_azul -> value());
+    trem_vermelho = new Trem(2, 380, 20, ui -> controle_vermelho -> value());
+    trem_verde = new Trem(3, 625, 20, ui -> controle_verde -> value());
+    trem_roxo = new Trem(4, 259, 264, ui -> controle_roxo -> value());
+    trem_laranja = new Trem(5, 505, 264, ui -> controle_laranja -> value());
 
-    connect(trem_azul, SIGNAL(updateGUI(int,int,int)), SLOT(updateInterface(int,int,int)));
-    connect(trem_vermelho, SIGNAL(updateGUI(int,int,int)), SLOT(updateInterface(int,int,int)));
-    connect(trem_verde, SIGNAL(updateGUI(int,int,int)), SLOT(updateInterface(int,int,int)));
-    connect(trem_roxo, SIGNAL(updateGUI(int,int,int)), SLOT(updateInterface(int,int,int)));
-    connect(trem_laranja, SIGNAL(updateGUI(int,int,int)), SLOT(updateInterface(int,int,int)));
+    connect(trem_azul, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem_vermelho, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem_verde, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem_roxo, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem_laranja, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
 
 }
 
@@ -25,19 +25,19 @@ MainWindow::~MainWindow() {
 void MainWindow::updateInterface(int id, int x, int y) {
     switch(id){
     case 1:
-        ui -> trem_azul -> setGeometry(x,y,50,50);
+        ui -> trem_azul -> setGeometry(x, y, 50, 50);
         break;
     case 2:
-        ui -> trem_vermelho -> setGeometry(x,y,50,50);
+        ui -> trem_vermelho -> setGeometry(x, y, 50, 50);
         break;
     case 3:
-        ui -> trem_verde -> setGeometry(x,y,50,50);
+        ui -> trem_verde -> setGeometry(x, y, 50, 50);
         break;
     case 4:
-        ui -> trem_roxo -> setGeometry(x,y,50,50);
+        ui -> trem_roxo -> setGeometry(x, y, 50, 50);
         break;
     case 5:
-        ui -> trem_laranja -> setGeometry(x,y,50,50);
+        ui -> trem_laranja -> setGeometry(x, y, 50, 50);
         break;
     default:
         break;

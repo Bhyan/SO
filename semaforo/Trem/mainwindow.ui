@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1004</width>
-    <height>707</height>
+    <width>935</width>
+    <height>592</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1603,6 +1603,9 @@
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QSlider" name="controle_verde">
     <property name="geometry">
@@ -2576,7 +2579,7 @@
      <enum>Qt::RightToLeft</enum>
     </property>
     <property name="minimum">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="maximum">
      <number>5000</number>
@@ -2592,6 +2595,9 @@
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QFrame" name="trem_vermelho">
@@ -2619,7 +2625,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1004</width>
+     <width>935</width>
      <height>22</height>
     </rect>
    </property>

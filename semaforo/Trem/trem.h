@@ -6,12 +6,12 @@
 class Trem: public QThread{
  Q_OBJECT
 public:
-    Trem(int,int,int);
+    Trem(int, int, int, int);
     void run();
     void setVelocidade(int valor);
 
 signals:
-    void updateGUI(int,int,int);
+    void updateGUI(int, int, int);
 
 private:
    int ID;
